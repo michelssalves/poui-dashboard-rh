@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tcp-poui": {
+    "poui-invoice-report": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tcp-poui",
+            "allowedCommonJsDependencies": [
+              "exceljs",
+              "file-saver"
+            ],
+            "outputPath": "dist/poui-invoice-report",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -26,18 +30,18 @@
                 "input": "public"
               }
             ],
-"styles": [
-
-  "node_modules/@po-ui/style/css/po-theme-default.min.css",
-  "src/styles.css"
-],
-
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "styles": [
+              "node_modules/@po-ui/style/css/po-theme-default.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
-             {
+                {
                   "type": "initial",
                   "maximumWarning": "4mb",
                   "maximumError": "5mb"
@@ -62,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tcp-poui:build:production"
+              "buildTarget": "poui-invoice-report:build:production"
             },
             "development": {
-              "buildTarget": "tcp-poui:build:development"
+              "buildTarget": "poui-invoice-report:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,18 +91,22 @@
                 "input": "public"
               }
             ],
-"styles": [
- 
-  "node_modules/@po-ui/style/css/po-theme-default.min.css",
-  "src/styles.css"
-],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "styles": [
+              "node_modules/@po-ui/style/css/po-theme-default.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/poui-invoice-report/"
           }
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }
