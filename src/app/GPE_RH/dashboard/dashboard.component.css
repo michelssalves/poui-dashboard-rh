@@ -1,0 +1,94 @@
+/* ===== Accordion de Filtros ===== */
+:host ::ng-deep .filters-accordion .po-accordion {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header do accordion (onde aparece "Filtros") */
+:host ::ng-deep .filters-accordion .po-accordion-item-header {
+  background: #ffffff;
+  border: 1px solid #e6e8eb;
+  border-radius: 12px;
+}
+
+/* Botão do header: altura, padding e alinhamento */
+:host ::ng-deep .filters-accordion .po-accordion-item-header-button {
+  padding: 12px 14px;
+  min-height: 48px;
+}
+
+/* Título "Filtros": mais forte e sem aquele espaço */
+:host ::ng-deep .filters-accordion .po-accordion-item-header-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Ícone da setinha: tamanho e alinhamento */
+:host ::ng-deep .filters-accordion .po-accordion-item-header-icon {
+  opacity: 0.85;
+}
+
+/* Conteúdo do accordion vira um “card” */
+:host ::ng-deep .filters-accordion .po-accordion-item-content {
+  border: 1px solid #e6e8eb;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  background: #ffffff;
+  padding: 12px 14px 14px;
+}
+
+/* ===== Alinhamento dos botões ===== */
+:host ::ng-deep .filters-actions .actions-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end; /* fica alinhado com os campos */
+  gap: 10px;
+  padding-bottom: 2px; /* dá “base” igual aos inputs */
+}
+
+/* (Opcional) botões com mesma altura, fica bem alinhado */
+:host ::ng-deep .filters-actions .actions-right .po-button {
+  height: 40px;
+}
+:host ::ng-deep .filters-accordion .po-accordion-item-header {
+  background: #f7f9fc;
+}
+:host ::ng-deep .filters-actions {
+  border-top: 1px solid #e6e8eb;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+/* CSS TABELA */
+:host ::ng-deep .rcap-table .po-table-container {
+  height: calc(100vh - 280px); /* ajuste esse 280px conforme seu topo/filtros */
+  max-height: 1100px;          /* opcional: trava máximo */
+}
+
+:host ::ng-deep .rcap-table .po-table-header-sticky th {
+  background: #f7f9fc;
+  border-bottom: 1px solid #e6e8eb;
+  font-weight: 600;
+}
+:host ::ng-deep .rcap-table .po-table-row:hover td {
+  background: #f3f5f7;
+}
+:host ::ng-deep .rcap-table .po-table-actions {
+  padding: 4px 0 8px;
+}
+
+:host ::ng-deep .rcap-table .po-table-actions-column-manager .po-button {
+  opacity: 0.75;
+}
+
+:host ::ng-deep .rcap-table .po-table-actions-column-manager .po-button:hover {
+  opacity: 1;
+}
+
+
+/* melhora leitura de valores monetários */
+:host ::ng-deep .po-table-column-cell {
+  font-variant-numeric: tabular-nums; /* números alinhados */
+}
+
+

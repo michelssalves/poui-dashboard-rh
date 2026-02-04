@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "poui-dashboard-rh": {
+    "tcp-poui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/poui-dashboard-rh",
+            "outputPath": "dist/tcp-poui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -26,28 +26,26 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+"styles": [
+
+  "node_modules/@po-ui/style/css/po-theme-default.min.css",
+  "src/styles.css"
+],
+
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           },
           "configurations": {
             "production": {
               "budgets": [
-                {
+             {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -64,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "poui-dashboard-rh:build:production"
+              "buildTarget": "tcp-poui:build:production"
             },
             "development": {
-              "buildTarget": "poui-dashboard-rh:build:development"
+              "buildTarget": "tcp-poui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,13 +87,18 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+"styles": [
+ 
+  "node_modules/@po-ui/style/css/po-theme-default.min.css",
+  "src/styles.css"
+],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

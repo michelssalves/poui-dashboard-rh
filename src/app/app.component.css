@@ -1,0 +1,67 @@
+.sample-menu-header-text-color {
+        color: #9da7a9;
+      
+}
+
+/* ===== Sidebar / menu ===== */
+:host ::ng-deep .po-menu {
+  border-right: 1px solid #e6e8eb;
+}
+
+/* Header do menu: centraliza e dá um respiro */
+:host ::ng-deep .po-menu-header-container-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px; /* mais bonito que spacing-xs */
+  min-height: 88px;   /* deixa a área do logo consistente */
+}
+
+/* Logo: controla tamanho e evita ficar “gigante” */
+:host ::ng-deep .po-menu-header-container-logo img {
+  display: block;
+  max-width: 92px;   /* ajusta aqui */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Quando colapsar, limita ainda mais a logo (se o PO UI usar esse attr) */
+:host ::ng-deep .po-menu[ng-reflect-collapsed="true"] .po-menu-header-container-logo img {
+  max-width: 44px;
+}
+
+/* Corpo do menu com espaço e scroll suave */
+:host ::ng-deep .po-menu-body {
+  padding-top: 6px;
+}
+
+/* Itens do menu: deixa mais “clean” */
+:host ::ng-deep .po-menu-item {
+  border-radius: 10px;
+  margin: 4px 10px;
+}
+
+/* Hover mais elegante */
+:host ::ng-deep .po-menu-item:hover {
+  background: #f3f5f7;
+}
+
+/* Item selecionado (active) com destaque mais moderno */
+:host ::ng-deep .po-menu-item.po-menu-item-active {
+  background: #eaf2ff;
+  font-weight: 600;
+}
+
+/* Ícone e texto alinhados e com espaçamento */
+:host ::ng-deep .po-menu-item .po-menu-item-icon {
+  margin-right: 10px;
+}
+
+/* Ajusta o “título/grupo” (ex.: Fiscal) */
+:host ::ng-deep .po-menu-group-title {
+  padding: 10px 16px;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
