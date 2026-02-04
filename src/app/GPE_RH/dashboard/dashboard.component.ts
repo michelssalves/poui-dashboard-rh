@@ -14,6 +14,7 @@ import {
   PoTableModule,
   PoWidgetModule
 } from '@po-ui/ng-components';
+import { of } from 'rxjs';
 
 interface CentroCusto {
   codCusto: string;
@@ -47,6 +48,7 @@ interface Funcoes {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
   delta = 0;
   orcado = 0;
   ativos = 0;
@@ -70,16 +72,95 @@ export class DashboardComponent {
   selectCusto: PoMultiselectOption[] = [];
   selectDepartamentos: PoMultiselectOption[] = [];
   selectFuncoes: PoMultiselectOption[] = [];
-  //readonly API_URL = 'http://vhwin1065:9095/rest/protheus/v1/poui';
   readonly API_URL = 'http://vhwin1065:9080/rest/protheus/v1/poui';
-
   filterMode = PoMultiselectFilterMode.contains;
+
+  useMock = true;
 
   constructor(private http: HttpClient, private poAlert: PoDialogService) { }
 
   chartOptions: PoChartOptions = {
     legend: true,
   };
+
+  private mockResponse = {
+    // totais / contadores simples
+    ativos: 120,
+    ferias: [
+      { real: 5 },
+      { real: 3 }
+    ],
+    // arrays usados por calcularTotalReal()
+    atestados: [
+      { cod: 'A1', real: 3 },
+      { cod: 'A2', real: 2 }
+    ],
+    afastadosCentroCustoReal: [
+      { codCusto: 'CC01', descCusto: 'Custo Vendas', real: 2 },
+      { codCusto: 'CC02', descCusto: 'Custo TI', real: 1 }
+    ],
+    centroCustoReal: [
+      { codCusto: 'CC01', descCusto: 'Custo Vendas', real: 30 },
+      { codCusto: 'CC02', descCusto: 'Custo TI', real: 20 },
+      { codCusto: 'CC03', descCusto: 'Custo RH', real: 10 }
+    ],
+    centroCustoOrc: [
+      { codCusto: 'CC01', descCusto: 'Custo Vendas', orcado: 25 },
+      { codCusto: 'CC02', descCusto: 'Custo TI', orcado: 25 },
+      { codCusto: 'CC03', descCusto: 'Custo RH', orcado: 15 }
+    ],
+
+    departamentosReal: [
+      { codDepto: 'D01', descDepto: 'Vendas', real: 40 },
+      { codDepto: 'D02', descDepto: 'TI', real: 18 }
+    ],
+    departamentosOrc: [
+      { codDepto: 'D01', descDepto: 'Vendas', orcado: 35 },
+      { codDepto: 'D02', descDepto: 'TI', orcado: 20 },
+      { codDepto: 'D03', descDepto: 'RH', orcado: 10 }
+    ],
+    afastadosDeparatamentosReal: [
+      { codDepto: 'D01', descDepto: 'Vendas', real: 1 }
+    ],
+
+    funcoesReal: [
+      { codFuncao: 'F01', descFuncao: 'Analista', real: 30 },
+      { codFuncao: 'F02', descFuncao: 'Desenvolvedor', real: 28 }
+    ],
+    funcoesOrc: [
+      { codFuncao: 'F01', descFuncao: 'Analista', orcado: 32 },
+      { codFuncao: 'F02', descFuncao: 'Desenvolvedor', orcado: 30 }
+    ],
+    afastadosFuncoesReal: [
+      { codFuncao: 'F02', descFuncao: 'Desenvolvedor', real: 2 }
+    ],
+
+    // select options para os multiselects (PoMultiselectOption[])
+    selectCustos: [
+      { label: 'CC01 - Custo Vendas', value: 'CC01' },
+      { label: 'CC02 - Custo TI', value: 'CC02' },
+      { label: 'CC03 - Custo RH', value: 'CC03' }
+    ] as PoMultiselectOption[],
+
+    selectDepartamentos: [
+      { label: 'D01 - Vendas', value: 'D01' },
+      { label: 'D02 - TI', value: 'D02' },
+      { label: 'D03 - RH', value: 'D03' }
+    ] as PoMultiselectOption[],
+
+    selectFuncoes: [
+      { label: 'F01 - Analista', value: 'F01' },
+      { label: 'F02 - Desenvolvedor', value: 'F02' }
+    ] as PoMultiselectOption[],
+
+    // lista de funcionários (para a tabela)
+    funcionarios: [
+      { matricula: '0001', nome: 'Mariana Silva', funcao: 'Analista', departamento: 'Vendas' },
+      { matricula: '0002', nome: 'João Souza', funcao: 'Desenvolvedor', departamento: 'TI' },
+      { matricula: '0003', nome: 'Ana Paula', funcao: 'Analista', departamento: 'RH' }
+    ]
+  };
+
 
   ngOnInit() {
     this.carregarDados();
@@ -117,6 +198,20 @@ export class DashboardComponent {
 
   carregarDados(body?: any): void {
     this.loading = true;
+
+    if (this.useMock) {
+      // simula atraso semelhante a uma chamada http
+      of(this.mockResponse).subscribe(response => {
+        // se quiser filtrar mock por body, pode fazer aqui antes de processar
+        this.processarDados(response);
+        this.loading = false;
+      }, err => {
+        console.error('Erro no mock:', err);
+        this.loading = false;
+      });
+      return;
+    }
+
     this.http.post<any>(`${this.API_URL}/listar-tabelas`, body || '', { headers: this.getHeader() })
       .subscribe(response => {
         this.processarDados(response);
@@ -132,6 +227,7 @@ export class DashboardComponent {
     this.custos = this.processarCentroCusto(response);
     this.departamentos = this.processarDepartamentos(response);
     this.funcoes = this.processarFuncoes(response);
+    this.funcionarios = response.funcionarios || [];
 
     // Atualiza variáveis de totais
     this.afastados = this.calcularTotalReal(response.afastadosCentroCustoReal);

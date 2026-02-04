@@ -1,5 +1,5 @@
 {
-  "name": "poui-invoice-report",
+  "name": "poui-dashboard-rh",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "protheus": "powershell -ExecutionPolicy Bypass -File ./build-protheus-app.ps1",
-    "deploy-protheus": "ng build --configuration production --output-path docs --base-href /poui-invoice-report/ && powershell -Command \"Copy-Item -Recurse -Force docs\\browser\\* docs\\; Remove-Item -Recurse -Force docs\\browser\""
+    "deploy-protheus": "ng build --configuration production --output-path docs --base-href /poui-dashboard-rh/ && powershell -Command \"Copy-Item -Recurse -Force docs\\browser\\* docs\\; Remove-Item -Recurse -Force docs\\browser\""
   },
   "private": true,
   "dependencies": {

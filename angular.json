@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "poui-invoice-report": {
+    "poui-dashboard-rh": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,7 +17,7 @@
               "exceljs",
               "file-saver"
             ],
-            "outputPath": "dist/poui-invoice-report",
+            "outputPath": "dist/poui-dashboard-rh",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "poui-invoice-report:build:production"
+              "buildTarget": "poui-dashboard-rh:build:production"
             },
             "development": {
-              "buildTarget": "poui-invoice-report:build:development"
+              "buildTarget": "poui-dashboard-rh:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,7 +103,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/poui-invoice-report/"
+            "baseHref": "/poui-dashboard-rh/"
           }
         }
       }
