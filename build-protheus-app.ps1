@@ -13,7 +13,11 @@ $appPath = "$resourcePath\$appName.app"
 cd $projeto
 
 Write-Host "⿡  Executando build..." -ForegroundColor Cyan
-ng build
+if (!(Test-Path "$projeto\src\app\modo.protheus.ts")) {
+    Write-Host "Falta src\app\modo.protheus.ts (copie de modo.protheus.example.ts e ajuste o endereco do REST)." -ForegroundColor Red
+    exit
+}
+ng build -c production,protheus
 
 # Verifica se o build ocorreu
 if (!(Test-Path $browserPath)) {

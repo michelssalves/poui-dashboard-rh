@@ -54,6 +54,14 @@
               ],
               "outputHashing": "all"
             },
+            "protheus": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/modo.ts",
+                  "with": "src/app/modo.protheus.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,

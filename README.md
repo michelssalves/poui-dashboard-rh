@@ -1,4 +1,12 @@
-# PouiDashboardRh
+# Dashboard RH (PO-UI)
+
+**Demonstração (dados fictícios):** https://michelssalves.github.io/poui-dashboard-rh/
+
+| Build | Uso |
+|---|---|
+| padrão (`ng build`) | modo demonstração: dados fictícios, sem endereço de servidor. É o que vai para o GitHub Pages |
+| `ng build -c production,protheus` | consome o REST do Protheus. Lê o endereço de `src/app/modo.protheus.ts`, que fica fora do Git (modelo em `modo.protheus.example.ts`). `build-protheus-app.ps1` já usa este build |
+
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
 

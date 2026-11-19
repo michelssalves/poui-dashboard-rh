@@ -15,6 +15,7 @@ import {
   PoWidgetModule
 } from '@po-ui/ng-components';
 import { of } from 'rxjs';
+import { API_URL, MODO_DEMO } from '../../modo';
 
 interface CentroCusto {
   codCusto: string;
@@ -72,10 +73,10 @@ export class DashboardComponent {
   selectCusto: PoMultiselectOption[] = [];
   selectDepartamentos: PoMultiselectOption[] = [];
   selectFuncoes: PoMultiselectOption[] = [];
-  readonly API_URL = 'http://vhwin1065:9080/rest/protheus/v1/poui';
+  readonly API_URL = API_URL;
   filterMode = PoMultiselectFilterMode.contains;
 
-  useMock = true;
+  useMock = MODO_DEMO;
 
   constructor(private http: HttpClient, private poAlert: PoDialogService) { }
 
